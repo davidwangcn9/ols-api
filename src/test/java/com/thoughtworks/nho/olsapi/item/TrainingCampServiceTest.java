@@ -1,5 +1,8 @@
 package com.thoughtworks.nho.olsapi.item;
 
+import com.thoughtworks.nho.olsapi.camp.ItemNotFoundException;
+import com.thoughtworks.nho.olsapi.camp.ItemService;
+import com.thoughtworks.nho.olsapi.camp.TrainingCampRepository;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -21,13 +24,13 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 @MockitoSettings(strictness = Strictness.STRICT_STUBS)
-class ItemServiceTest {
+class TrainingCampServiceTest {
     @Nested
     class getItem {
         @Nested
         class when_an_existing_id_is_given {
             @Mock
-            private ItemRepository itemRepository;
+            private TrainingCampRepository itemRepository;
 
             @Test
             void returns_the_item() throws ItemNotFoundException {
@@ -42,7 +45,7 @@ class ItemServiceTest {
         @Nested
         class when_an_non_existing_id_is_given {
             @Mock
-            private ItemRepository itemRepository;
+            private TrainingCampRepository itemRepository;
 
             @Test
             void throws_item_not_found_exception() {
@@ -59,7 +62,7 @@ class ItemServiceTest {
         @Nested
         class when_requesting_items {
             @Mock
-            private ItemRepository itemRepository;
+            private TrainingCampRepository itemRepository;
 
             @Test
             void returns_items() {
@@ -77,7 +80,7 @@ class ItemServiceTest {
         @Nested
         class when_an_item_is_given {
             @Mock
-            private ItemRepository itemRepository;
+            private TrainingCampRepository itemRepository;
 
             @Test
             void creates_the_item() {
@@ -96,7 +99,7 @@ class ItemServiceTest {
         @Nested
         class when_an_existing_item_is_given {
             @Mock
-            private ItemRepository itemRepository;
+            private TrainingCampRepository itemRepository;
 
             @Test
             void updates_the_item() {
@@ -112,7 +115,7 @@ class ItemServiceTest {
         @Nested
         class when_an_non_existing_item_is_given {
             @Mock
-            private ItemRepository itemRepository;
+            private TrainingCampRepository itemRepository;
 
             @Test
             void throws_item_not_found_exception() {
@@ -129,7 +132,7 @@ class ItemServiceTest {
         @Nested
         class when_an_existing_item_is_given {
             @Mock
-            private ItemRepository itemRepository;
+            private TrainingCampRepository itemRepository;
 
             @Test
             void deletes_the_item() {
@@ -143,7 +146,7 @@ class ItemServiceTest {
         @Nested
         class when_an_non_existing_item_is_given {
             @Mock
-            private ItemRepository itemRepository;
+            private TrainingCampRepository itemRepository;
 
             @Test
             void throws_item_not_found_exception() {

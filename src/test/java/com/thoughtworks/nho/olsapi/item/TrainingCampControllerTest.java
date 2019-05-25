@@ -1,6 +1,9 @@
 package com.thoughtworks.nho.olsapi.item;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.thoughtworks.nho.olsapi.camp.TrainingCamp;
+import com.thoughtworks.nho.olsapi.camp.TrainingCampController;
+import com.thoughtworks.nho.olsapi.camp.TrainingCampService;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -25,13 +28,13 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(ItemController.class)
-class ItemControllerTest {
+@WebMvcTest(TrainingCampController.class)
+class TrainingCampControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
     @MockBean
-    private ItemService itemService;
+    private TrainingCampService itemService;
 
     private static ObjectMapper jacksonDataMapper;
 
@@ -43,15 +46,15 @@ class ItemControllerTest {
         jacksonDataMapper.setDateFormat(dateFormat);
     }
 
-    private ArrayList<Item> buildItems() {
+    private ArrayList<TrainingCamp> buildItems() {
         var expectedItem = buildItem();
-        var expectedItems = new ArrayList<Item>();
+        var expectedItems = new ArrayList<TrainingCamp>();
         expectedItems.add(expectedItem);
         return expectedItems;
     }
 
-    private Item buildItem() {
-        var expectedItem = new Item();
+    private TrainingCamp buildItem() {
+        var expectedItem = new TrainingCamp();
         expectedItem.setName("iPhone");
         expectedItem.setCreatedAt(new Date());
         expectedItem.setUpdatedAt(new Date());

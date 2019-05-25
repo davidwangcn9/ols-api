@@ -1,4 +1,4 @@
-package com.thoughtworks.nho.olsapi.item;
+package com.thoughtworks.nho.olsapi.camp;
 
 
 import java.sql.Timestamp;

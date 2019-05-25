@@ -1,6 +1,6 @@
 package com.thoughtworks.nho.olsapi;
 
-import com.thoughtworks.nho.olsapi.item.Task;
+import com.thoughtworks.nho.olsapi.camp.Task;
 
 import java.util.List;
 

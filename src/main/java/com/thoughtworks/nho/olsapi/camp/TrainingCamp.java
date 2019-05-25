@@ -1,9 +1,8 @@
-package com.thoughtworks.nho.olsapi.item;
+package com.thoughtworks.nho.olsapi.camp;
 
 import com.thoughtworks.nho.olsapi.TaskService;
 
 import java.util.List;
-import java.util.Random;
 import java.util.UUID;
 
 public class TrainingCamp extends Entity{
