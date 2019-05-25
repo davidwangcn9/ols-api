@@ -3,6 +3,8 @@ package com.thoughtworks.nho.olsapi.camp;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Service
 class TrainingCampService {
     TrainingCampService(TrainingCampRepository trainingCampRepository) {
@@ -11,7 +13,7 @@ class TrainingCampService {
 
     private final TrainingCampRepository trainingCampRepository;
 
-    TrainingCamp getTrainingCamp(long id) throws TrainingCampNotFoundException {
+    TrainingCamp getTrainingCamp(UUID id) throws TrainingCampNotFoundException {
         var optionalFoundTrainingCamp = trainingCampRepository.findById(id);
         if (optionalFoundTrainingCamp.isPresent()) {
             return optionalFoundTrainingCamp.get();
@@ -21,14 +23,14 @@ class TrainingCampService {
     }
 
     Iterable<TrainingCamp> getTrainingCamps() {
-        return trainingCampRepository.findAll();
+        return trainingCampRepository.findAllByOrderByCreatedTimeDesc();
     }
 
     TrainingCamp createTrainingCamp(TrainingCamp trainingCamp) {
         return trainingCampRepository.save(trainingCamp);
     }
 
-    void deleteTrainingCamp(long id) throws TrainingCampNotFoundException {
+    void deleteTrainingCamp(UUID id) throws TrainingCampNotFoundException {
         try {
             trainingCampRepository.deleteById(id);
         } catch (EmptyResultDataAccessException e) {

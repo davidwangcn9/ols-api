@@ -12,6 +12,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 
 import java.util.ArrayList;
 import java.util.Optional;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -32,10 +33,11 @@ class TrainingCampServiceTest {
 
             @Test
             void returns_the_TrainingCamp() throws TrainingCampNotFoundException {
+                var id= UUID.randomUUID();
                 var trainingCampService = new TrainingCampService(trainingCampRepository);
                 var expectedTrainingCamp = new TrainingCamp("","","");
-                when(trainingCampRepository.findById(1L)).thenReturn(Optional.of(expectedTrainingCamp));
-                var actualTrainingCamp = trainingCampService.getTrainingCamp(1L);
+                when(trainingCampRepository.findById(id)).thenReturn(Optional.of(expectedTrainingCamp));
+                var actualTrainingCamp = trainingCampService.getTrainingCamp(id);
                 assertEquals(expectedTrainingCamp, actualTrainingCamp);
             }
         }
@@ -47,7 +49,7 @@ class TrainingCampServiceTest {
 
             @Test
             void throws_item_not_found_exception() {
-                var givenId = 1L;
+                var givenId = UUID.randomUUID();
                 when(trainingCampRepository.findById(givenId)).thenReturn(Optional.empty());
                 var itemService = new TrainingCampService(trainingCampRepository);
                 assertThrows(TrainingCampNotFoundException.class, () -> itemService.getTrainingCamp(givenId));
@@ -134,7 +136,7 @@ class TrainingCampServiceTest {
 
             @Test
             void deletes_the_item() {
-                var givenId = 1L;
+                var givenId = UUID.randomUUID();
                 doNothing().when(trainingCampRepository).deleteById(givenId);
                 var trainingCampService = new TrainingCampService(trainingCampRepository);
                 assertDoesNotThrow(() -> trainingCampService.deleteTrainingCamp(givenId));
@@ -148,10 +150,10 @@ class TrainingCampServiceTest {
 
             @Test
             void throws_camp_not_found_exception() {
-                var givenId = 1L;
+                var givenId = UUID.randomUUID();
                 doThrow(EmptyResultDataAccessException.class).when(trainingCampRepository).deleteById(givenId);
                 var trainingCampService = new TrainingCampService(trainingCampRepository);
-                assertThrows(TrainingCampNotFoundException.class, () -> trainingCampService.deleteTrainingCamp(1L));
+                assertThrows(TrainingCampNotFoundException.class, () -> trainingCampService.deleteTrainingCamp(givenId));
             }
         }
     }

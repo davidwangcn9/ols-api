@@ -1,0 +1,41 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: David
+      changes:
+        - createTable:
+            tableName: training_camp
+            columns:
+              - column:
+                  name: id
+                  type: uuid
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: title
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: start_time
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_time
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: 2
+      author: David
+      changes:
+        - sqlFile:
+            encoding: utf8
+            path: classpath:db/changelog/sqlfile/mockData.sql

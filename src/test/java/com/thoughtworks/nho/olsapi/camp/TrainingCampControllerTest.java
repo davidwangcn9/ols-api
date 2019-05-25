@@ -14,6 +14,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.TimeZone;
+import java.util.UUID;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
@@ -79,7 +80,7 @@ class TrainingCampControllerTest {
         class when_an_existing_id_is_given {
             @Test
             void responds_the_item() throws TrainingCampNotFoundException, Exception {
-                var givenId = 1L;
+                var givenId = UUID.randomUUID();
                 var expectedItem = buildTrainingCamp();
                 var payload = jacksonDataMapper.writeValueAsString(expectedItem);
                 when(trainingCampService.getTrainingCamp(givenId)).thenReturn(expectedItem);
@@ -93,7 +94,7 @@ class TrainingCampControllerTest {
         class when_an_non_existing_id_is_given {
             @Test
             void responds_404() throws TrainingCampNotFoundException, Exception {
-                var givenId = 2L;
+                var givenId = UUID.randomUUID();
                 when(trainingCampService.getTrainingCamp(givenId)).thenThrow(TrainingCampNotFoundException.class);
                 mockMvc.perform(get("/items/{id}", givenId))
                         .andExpect(status().isNotFound());
