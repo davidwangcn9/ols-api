@@ -1,6 +1,9 @@
 package com.thoughtworks.nho.olsapi.camp;
 
-public class Task extends Entity{
+import javax.persistence.Entity;
+
+@Entity
+public class Task extends EntityDTO {
     public Task(String title, String description) {
         super(title, description);
     }

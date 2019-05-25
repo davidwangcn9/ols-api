@@ -36,7 +36,7 @@ public class TrainingCampController {
 //    @PutMapping(value = "/camps/{id}")
 //    public ResponseEntity<TrainingCamp> updateTrainingCamp(@PathVariable Long id, @RequestBody TrainingCamp trainingCamp) {
 //        try {
-//            var updatedTrainingCamp = trainingCampService.updateTrainingCamp(id, item);
+//            var updatedTrainingCamp = trainingCampService.updateTrainingCamp(id, camp);
 //            return new ResponseEntity<>(updatedTrainingCamp, HttpStatus.OK);
 //        } catch (TrainingCampNotFoundException e) {
 //            return new ResponseEntity<>(HttpStatus.NOT_FOUND);

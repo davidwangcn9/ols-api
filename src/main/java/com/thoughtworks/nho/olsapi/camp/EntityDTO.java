@@ -1,11 +1,15 @@
 package com.thoughtworks.nho.olsapi.camp;
 
-
+import javax.persistence.Id;
 import java.sql.Timestamp;
 import java.util.UUID;
 
-public class Entity {
+
+public class EntityDTO {
+
+    @Id
     private UUID id;
+
     private String title;
     private String description;
     private Timestamp createTime;
@@ -26,7 +30,7 @@ public class Entity {
         return createTime;
     }
 
-    public Entity(String title, String description) {
+    public EntityDTO(String title, String description) {
         this.id=UUID.randomUUID();
         this.title = title;
         this.description = description;
