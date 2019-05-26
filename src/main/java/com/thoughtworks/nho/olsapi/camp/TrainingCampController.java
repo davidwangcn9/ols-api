@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.UUID;
 
 @RestController
+@CrossOrigin(allowCredentials="true",maxAge = 3600)
 public class TrainingCampController {
     TrainingCampController(TrainingCampService trainingCampService) {
         this.trainingCampService = trainingCampService;
@@ -18,6 +19,11 @@ public class TrainingCampController {
     @GetMapping(value = "/camps")
     public Iterable<TrainingCamp> getTrainingCamps() {
         return trainingCampService.getTrainingCamps();
+    }
+
+    @GetMapping(value = "/camps/query={name}")
+    public Iterable<TrainingCamp> getTrainingCamps(@PathVariable String name) {
+        return trainingCampService.getTrainingCamps(name);
     }
 
     @GetMapping(value = "/camps/{uuid}")

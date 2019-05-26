@@ -2,14 +2,14 @@ package com.thoughtworks.nho.olsapi.camp;
 
 import com.thoughtworks.nho.olsapi.TaskService;
 
+import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Transient;
 import java.util.List;
 import java.util.UUID;
-import javax.persistence.Entity;
 
 
-@javax.persistence.Entity
+@Entity
 public class TrainingCamp{
     @Id
     private UUID id;
