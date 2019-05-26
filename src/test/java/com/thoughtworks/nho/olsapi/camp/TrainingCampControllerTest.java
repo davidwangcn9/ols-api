@@ -58,68 +58,8 @@ class TrainingCampControllerTest {
         return expectedItem;
     }
 
-    @Nested
-    class getItems {
-        @Nested
-        class when_requesting_items {
-            @Test
-            void responds_items() throws Exception {
-                var expectedItems = buildItems();
-                var payload = jacksonDataMapper.writeValueAsString(expectedItems);
-                when(trainingCampService.getTrainingCamps()).thenReturn(expectedItems);
-                mockMvc.perform(get("/items"))
-                        .andExpect(status().isOk())
-                        .andExpect(content().string(payload));
-            }
-        }
-    }
 
-    @Nested
-    class getItem {
-        @Nested
-        class when_an_existing_id_is_given {
-            @Test
-            void responds_the_item() throws TrainingCampNotFoundException, Exception {
-                var givenId = UUID.randomUUID();
-                var expectedItem = buildTrainingCamp();
-                var payload = jacksonDataMapper.writeValueAsString(expectedItem);
-                when(trainingCampService.getTrainingCamp(givenId)).thenReturn(expectedItem);
-                mockMvc.perform(get("/items/{id}", givenId))
-                        .andExpect(status().isOk())
-                        .andExpect(content().string(payload));
-            }
-        }
 
-        @Nested
-        class when_an_non_existing_id_is_given {
-            @Test
-            void responds_404() throws TrainingCampNotFoundException, Exception {
-                var givenId = UUID.randomUUID();
-                when(trainingCampService.getTrainingCamp(givenId)).thenThrow(TrainingCampNotFoundException.class);
-                mockMvc.perform(get("/items/{id}", givenId))
-                        .andExpect(status().isNotFound());
-            }
-        }
-    }
-
-    @Nested
-    class createItem {
-        @Nested
-        class when_an_item_is_given {
-            @Test
-            void creates_the_item() throws Exception {
-                var createdItem = buildTrainingCamp();
-                var payload = jacksonDataMapper.writeValueAsString(createdItem);
-                when(trainingCampService.createTrainingCamp(any(TrainingCamp.class))).thenReturn(createdItem);
-                mockMvc.perform(post("/items")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .accept(MediaType.APPLICATION_JSON)
-                        .content(payload))
-                        .andExpect(status().isCreated())
-                        .andExpect(content().string(payload));
-            }
-        }
-    }
 
 
 //    @Nested

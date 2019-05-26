@@ -67,7 +67,7 @@ class TrainingCampServiceTest {
             @Test
             void returns_items() {
                 var expectedTrainingCamps = new ArrayList<TrainingCamp>();
-                when(trainingCampRepository.findAll()).thenReturn(expectedTrainingCamps);
+                when(trainingCampRepository.findAllByOrderByCreatedTimeDesc()).thenReturn(expectedTrainingCamps);
                 var trainingCampService = new TrainingCampService(trainingCampRepository);
                 var actualTrainingCamps = trainingCampService.getTrainingCamps();
                 assertEquals(expectedTrainingCamps, actualTrainingCamps);
