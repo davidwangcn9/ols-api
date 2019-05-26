@@ -8,6 +8,7 @@ import java.util.UUID;
 
 @RestController
 @CrossOrigin(allowCredentials="true",maxAge = 3600)
+@RequestMapping("/api")
 public class TrainingCampController {
     TrainingCampController(TrainingCampService trainingCampService) {
         this.trainingCampService = trainingCampService;
