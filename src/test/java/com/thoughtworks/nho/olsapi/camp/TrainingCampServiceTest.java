@@ -24,6 +24,8 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 @MockitoSettings(strictness = Strictness.STRICT_STUBS)
 class TrainingCampServiceTest {
+
+
     @Nested
     class getTrainingCamp {
         @Nested
@@ -58,14 +60,14 @@ class TrainingCampServiceTest {
     }
 
     @Nested
-    class getItems {
+    class getTrainingCamps {
         @Nested
-        class when_requesting_items {
+        class when_requesting_camps {
             @Mock
             private TrainingCampRepository trainingCampRepository;
 
             @Test
-            void returns_items() {
+            void returns_camps() {
                 var expectedTrainingCamps = new ArrayList<TrainingCamp>();
                 when(trainingCampRepository.findAllByOrderByCreatedTimeDesc()).thenReturn(expectedTrainingCamps);
                 var trainingCampService = new TrainingCampService(trainingCampRepository);
@@ -83,77 +85,13 @@ class TrainingCampServiceTest {
             private TrainingCampRepository trainingCampRepository;
 
             @Test
-            void creates_the_item() {
-                var givenTrainingCamp = new TrainingCamp("","","");
-                var createdTrainingCamp = new TrainingCamp("","","");
+            void creates_the_camp() {
+                var givenTrainingCamp = new TrainingCamp("", "", "");
+                var createdTrainingCamp = new TrainingCamp("", "", "");
                 when(trainingCampRepository.save(givenTrainingCamp)).thenReturn(createdTrainingCamp);
                 var trainingCampService = new TrainingCampService(trainingCampRepository);
                 var actualTrainingCamp = trainingCampService.createTrainingCamp(givenTrainingCamp);
                 assertEquals(createdTrainingCamp, actualTrainingCamp);
-            }
-        }
-    }
-
-    @Nested
-    class updateItem {
-        @Nested
-        class when_an_existing_camp_is_given {
-            @Mock
-            private TrainingCampRepository trainingCampRepository;
-
-            @Test
-            void updates_the_item() {
-                var givenTrainingCamp = new TrainingCamp("","","");
-                var updatedTrainingCamp = new TrainingCamp("","","");
-                when(trainingCampRepository.save(givenTrainingCamp)).thenReturn(updatedTrainingCamp);
-                var trainingCampService = new TrainingCampService(trainingCampRepository);
-                var actualTrainingCamp = trainingCampService.createTrainingCamp(givenTrainingCamp);
-                assertEquals(updatedTrainingCamp, actualTrainingCamp);
-            }
-        }
-
-//        @Nested
-//        class when_an_non_existing_camp_is_given {
-//            @Mock
-//            private TrainingCampRepository trainingCampRepository;
-//
-//            @Test
-//            void throws_camp_not_found_exception() {
-//                var givenId = 1L;
-//                when(trainingCampRepository.findById(givenId)).thenReturn(Optional.empty());
-//                var itemService = new TrainingCampService(trainingCampRepository);
-//                assertThrows(TrainingCampNotFoundException.class, () -> itemService.updateItem(givenId, new Item()));
-//            }
-//        }
-    }
-
-    @Nested
-    class deleteTrainingCamp {
-        @Nested
-        class when_an_existing_camp_is_given {
-            @Mock
-            private TrainingCampRepository trainingCampRepository;
-
-            @Test
-            void deletes_the_item() {
-                var givenId = UUID.randomUUID();
-                doNothing().when(trainingCampRepository).deleteById(givenId);
-                var trainingCampService = new TrainingCampService(trainingCampRepository);
-                assertDoesNotThrow(() -> trainingCampService.deleteTrainingCamp(givenId));
-            }
-        }
-
-        @Nested
-        class when_an_non_existing_camp_is_given {
-            @Mock
-            private TrainingCampRepository trainingCampRepository;
-
-            @Test
-            void throws_camp_not_found_exception() {
-                var givenId = UUID.randomUUID();
-                doThrow(EmptyResultDataAccessException.class).when(trainingCampRepository).deleteById(givenId);
-                var trainingCampService = new TrainingCampService(trainingCampRepository);
-                assertThrows(TrainingCampNotFoundException.class, () -> trainingCampService.deleteTrainingCamp(givenId));
             }
         }
     }
